@@ -26,12 +26,18 @@
     },
     {
       "path": "./libs/auth"
+    },
+    {
+      "path": "./libs/data"
+    },
+    {
+      "path": "./libs/auth"
     }
   ],
   "compilerOptions": {
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
   }
 }

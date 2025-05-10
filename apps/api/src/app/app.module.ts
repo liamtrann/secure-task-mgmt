@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
 import { OrganizationModule } from './modules/organization/organization.module';
 import { TaskModule } from './modules/task';
-
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 @Module({
   imports: [
     // TypeORM configuration
@@ -23,7 +23,8 @@ import { TaskModule } from './modules/task';
     }),
 
     // GraphQL configuration
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'apps/api/src/graphql/schema.gql'),
       sortSchema: true,
       playground: true,

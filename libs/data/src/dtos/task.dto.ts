@@ -12,5 +12,5 @@ export class CreateTaskDto {
   status!: 'TODO' | 'IN_PROGRESS' | 'DONE';
 
   @Field()
-  ownerId!: string;
+  owner!: string;
 }

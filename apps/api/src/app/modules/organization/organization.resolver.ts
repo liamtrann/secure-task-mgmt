@@ -15,7 +15,7 @@ export class OrganizationResolver {
   ) {}
 
   @Query(() => [Organization])
-  @Roles(Role.OWNER, Role.ADMIN)
+  @Roles(Role.OWNER)
   async organizations(): Promise<Organization[]> {
     return this.orgRepo.find({ relations: ['users'] });
   }

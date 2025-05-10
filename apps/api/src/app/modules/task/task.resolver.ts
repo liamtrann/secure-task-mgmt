@@ -16,7 +16,7 @@ export class TaskResolver {
   @Roles(Role.OWNER, Role.ADMIN, Role.VIEWER)
   @Query(() => [Task])
   tasks(@Context('user') user: User) {
-    return this.taskService.findAll(user);
+    return this.taskService.findAllTasks(user);
   }
 
   @UseGuards(RolesGuard)
@@ -26,7 +26,7 @@ export class TaskResolver {
     @Args('input') input: CreateTaskInput,
     @Context('user') user: User
   ) {
-    return this.taskService.create(input, user);
+    return this.taskService.createTask(input, user);
   }
 
   @UseGuards(RolesGuard)
@@ -36,7 +36,7 @@ export class TaskResolver {
     @Args('input') input: UpdateTaskInput,
     @Context('user') user: User
   ) {
-    return this.taskService.update(input, user);
+    return this.taskService.updateTask(input, user);
   }
 
   @UseGuards(RolesGuard)

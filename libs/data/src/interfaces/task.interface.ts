@@ -5,6 +5,6 @@ export interface ITask {
   status: 'TODO' | 'IN_PROGRESS' | 'DONE';
   createdAt: Date;
   updatedAt: Date;
-  ownerId: string;
+  owner: string;
   organizationId: string;
 }

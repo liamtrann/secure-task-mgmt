@@ -4,10 +4,10 @@
   "include": [],
   "references": [
     {
-      "path": "../../libs/auth"
+      "path": "../../libs/data"
     },
     {
-      "path": "../../libs/data"
+      "path": "../../libs/auth"
     },
     {
       "path": "./tsconfig.app.json"

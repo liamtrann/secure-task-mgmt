@@ -27,5 +27,5 @@ export class Task {
 
   @Field(() => User)
   @ManyToOne(() => User)
-  ownerId!: User;
+  owner!: User;
 }
