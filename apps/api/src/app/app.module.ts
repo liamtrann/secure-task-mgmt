@@ -9,6 +9,7 @@ import { OrganizationModule } from './modules/organization/organization.module';
 import { TaskModule } from './modules/task';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuditLogModule } from './modules/audi-logs/audit-log.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -39,7 +40,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     UserModule,
     OrganizationModule,
     TaskModule,
-    // AuditLogModule,
+    AuditLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
