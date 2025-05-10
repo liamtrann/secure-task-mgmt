@@ -5,6 +5,33 @@
   "references": [
     {
       "path": "./apps/dashboard"
+    },
+    {
+      "path": "./apps/api-e2e"
+    },
+    {
+      "path": "./apps/api"
+    },
+    {
+      "path": "./libs/data"
+    },
+    {
+      "path": "./libs/auth"
+    },
+    {
+      "path": "./libs/data"
+    },
+    {
+      "path": "./libs/data"
+    },
+    {
+      "path": "./libs/auth"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false
+  }
 }

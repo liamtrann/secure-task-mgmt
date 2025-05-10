@@ -1,7 +1,14 @@
 {
+  "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
   "references": [
+    {
+      "path": "../../libs/auth"
+    },
+    {
+      "path": "../../libs/data"
+    },
     {
       "path": "./tsconfig.app.json"
     },
@@ -9,9 +16,8 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "esModuleInterop": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true
   }
 }
