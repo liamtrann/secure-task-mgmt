@@ -13,5 +13,5 @@ export class CreateUserInput {
   role!: Role;
 
   @Field()
-  organizationId?: string;
+  organizationId!: string;
 }

@@ -1,22 +1,39 @@
-import { Resolver, Query } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { Organization } from './organization.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { RolesGuard, Roles } from '@secure-task-mgmt/auth';
-import { Role } from '@secure-task-mgmt/data';
 
 @Resolver(() => Organization)
-@UseGuards(RolesGuard)
 export class OrganizationResolver {
   constructor(
     @InjectRepository(Organization)
     private readonly orgRepo: Repository<Organization>
   ) {}
 
+  // Fetch all organizations (existing)
   @Query(() => [Organization])
-  @Roles(Role.OWNER)
   async organizations(): Promise<Organization[]> {
     return this.orgRepo.find({ relations: ['users'] });
+  }
+
+  // Create a new organization (no strict role restriction)
+  @Mutation(() => Organization)
+  async createOrganization(@Args('name') name: string): Promise<Organization> {
+    const newOrganization = this.orgRepo.create({ name });
+    return this.orgRepo.save(newOrganization);
+  }
+
+  // Update an existing organization
+  @Mutation(() => Organization)
+  async updateOrganization(
+    @Args('id') id: string,
+    @Args('name') name: string
+  ): Promise<Organization> {
+    const organization = await this.orgRepo.findOne(id);
+    if (!organization) {
+      throw new Error('Organization not found');
+    }
+    organization.name = name;
+    return this.orgRepo.save(organization);
   }
 }

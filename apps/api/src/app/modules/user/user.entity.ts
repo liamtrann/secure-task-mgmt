@@ -23,6 +23,6 @@ export class User {
   role!: Role;
 
   @Field(() => Organization)
-  @ManyToOne(() => Organization, (org) => org.users)
+  @ManyToOne(() => Organization, { nullable: true })
   organization?: Organization;
 }
