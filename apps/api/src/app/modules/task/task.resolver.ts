@@ -1,12 +1,12 @@
-import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { Task } from './task.entity';
 import { TaskService } from './task.service';
 import { CreateTaskInput } from './dto/create-task.input';
 import { UpdateTaskInput } from './dto/update-task.input';
-import { UseGuards } from '@nestjs/common';
-import { User } from '../user';
-import { RolesGuard, Roles } from '@secure-task-mgmt/auth';
 import { Role } from '@secure-task-mgmt/data';
+import { User } from '../user/user.entity';
+import { UseGuards } from '@nestjs/common';
+import { Roles, RolesGuard } from '@secure-task-mgmt/auth';
 
 @Resolver(() => Task)
 export class TaskResolver {

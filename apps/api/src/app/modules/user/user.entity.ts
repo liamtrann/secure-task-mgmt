@@ -25,4 +25,7 @@ export class User {
   @Field(() => Organization)
   @ManyToOne(() => Organization, { nullable: true })
   organization?: Organization;
+
+  @Column()
+  password!: string;
 }
