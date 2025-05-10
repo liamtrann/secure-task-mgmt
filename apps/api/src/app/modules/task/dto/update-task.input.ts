@@ -15,5 +15,11 @@ export class UpdateTaskInput {
   category?: string;
 
   @Field({ nullable: true })
-  status?: string;
+  status?: 'todo' | 'in-progress' | 'done';
+
+  @Field({ nullable: true })
+  priority?: 'low' | 'medium' | 'high';
+
+  @Field({ nullable: true })
+  ownerId?: string;
 }

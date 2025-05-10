@@ -34,8 +34,8 @@ describe('TaskResolver', () => {
       ],
     }).compile();
 
-    resolver = module.get<TaskResolver>(TaskResolver);
-    service = module.get<TaskService>(TaskService);
+    resolver = module.get(TaskResolver);
+    service = module.get(TaskService);
   });
 
   it('should be defined', () => {
@@ -43,39 +43,40 @@ describe('TaskResolver', () => {
   });
 
   describe('tasks', () => {
-    it('should return an array of tasks', async () => {
-      const tasks: Task[] = [
+    it('should return all tasks for the user', async () => {
+      const mockTasks: Task[] = [
         {
           id: 't1',
-          title: 'Task 1',
+          title: 'Sample Task',
           description: '',
           owner: mockUser,
         } as Task,
       ];
-      jest.spyOn(service, 'findAllTasks').mockResolvedValue(tasks);
+
+      jest.spyOn(service, 'findAllTasks').mockResolvedValue(mockTasks);
 
       const result = await resolver.tasks(mockUser);
-      expect(result).toEqual(tasks);
+      expect(result).toEqual(mockTasks);
     });
   });
 
   describe('createTask', () => {
-    it('should create and return a task', async () => {
+    it('should create and return a new task', async () => {
       const input: CreateTaskInput = {
         title: 'New Task',
-        description: 'Description',
+        description: 'Details here',
       };
-      const createdTask: Task = {
+
+      const mockTask: Task = {
         id: 't2',
-        title: input.title,
-        description: input.description,
+        ...input,
         owner: mockUser,
       } as Task;
 
-      jest.spyOn(service, 'createTask').mockResolvedValue(createdTask);
+      jest.spyOn(service, 'createTask').mockResolvedValue(mockTask);
 
       const result = await resolver.createTask(input, mockUser);
-      expect(result).toEqual(createdTask);
+      expect(result).toEqual(mockTask);
     });
   });
 
@@ -83,25 +84,25 @@ describe('TaskResolver', () => {
     it('should update and return the task', async () => {
       const input: UpdateTaskInput = {
         id: 't3',
-        title: 'Updated Title',
+        title: 'Updated Task Title',
       };
 
       const updatedTask: Task = {
         id: input.id,
         title: input.title,
-        description: 'Old description',
+        description: 'Existing Description',
         owner: mockUser,
       } as Task;
 
       jest.spyOn(service, 'updateTask').mockResolvedValue(updatedTask);
 
       const result = await resolver.updateTask(input, mockUser);
-      expect(result.title).toEqual('Updated Title');
+      expect(result.title).toBe('Updated Task Title');
     });
   });
 
   describe('deleteTask', () => {
-    it('should return true on successful deletion', async () => {
+    it('should return true after successful deletion', async () => {
       jest.spyOn(service, 'delete').mockResolvedValue(true);
 
       const result = await resolver.deleteTask('t4', mockUser);

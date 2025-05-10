@@ -25,5 +25,5 @@
     "src/**/*.test.jsx",
     "jest.config.ts"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "src/app/types/auth.ts", "src/app/types/task.ts"]
 }

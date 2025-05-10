@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export type Role = 'Owner' | 'Admin' | 'Viewer';
-
-interface AuthState {
-  role: Role;
-}
+import { AuthState } from '../../types/auth';
+import { Role } from '../../types/enums';
 
 const initialState: AuthState = {
-  role: 'Viewer',
+  currentRole: Role.VIEWER,
+  isAuthenticated: true,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setRole: (state, action: PayloadAction<Role>) => {
-      state.role = action.payload;
+    switchRole: (state, action: PayloadAction<Role>) => {
+      state.currentRole = action.payload;
+    },
+    logout: (state) => {
+      state.isAuthenticated = false;
+      state.currentRole = Role.VIEWER;
     },
   },
 });
 
-export const { setRole } = authSlice.actions;
+export const { switchRole, logout } = authSlice.actions;
 export default authSlice.reducer;
-export type { AuthState };

@@ -1,19 +1,28 @@
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { setRole } from '../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { switchRole } from '../features/auth/authSlice';
+import SelectOption from './common/SelectOption';
+import { Role } from '../types/enums';
 
-export default function RoleSwitcher() {
-  const dispatch = useAppDispatch();
-  const role = useAppSelector((state) => state.auth.role);
+const roleOptions: Role[] = [Role.ADMIN, Role.OWNER, Role.VIEWER];
+
+const RoleSwitcher = () => {
+  const dispatch = useDispatch();
+  const currentRole = useSelector((state: RootState) => state.auth.currentRole);
+
+  const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(switchRole(e.target.value as Role));
+  };
 
   return (
-    <select
-      value={role}
-      onChange={(e) => dispatch(setRole(e.target.value as any))}
-      className="p-2 rounded border"
-    >
-      <option>Owner</option>
-      <option>Admin</option>
-      <option>Viewer</option>
-    </select>
+    <div className="role-switcher">
+      <SelectOption
+        value={currentRole}
+        onChange={handleRoleChange}
+        options={roleOptions}
+      />
+    </div>
   );
-}
+};
+
+export default RoleSwitcher;

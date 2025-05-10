@@ -15,7 +15,7 @@
     "../../libs/data/src/**/*.ts",
     "../../libs/auth/src/index.ts",
     "../../libs/data/src/index.ts"
-  ],
+, "../dashboard/src/app/types/auth.ts", "../dashboard/src/app/types/task.ts"  ],
   "references": [
     {
       "path": "../../libs/data/tsconfig.lib.json"

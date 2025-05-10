@@ -1,19 +1,19 @@
-import OrganizationSelector from './components/OrganizationSelector';
+import { useSelector } from 'react-redux';
 import RoleSwitcher from './components/RoleSwitcher';
-import TaskList from './components/TaskList';
-import NxWelcome from './nx-welcome';
+import TaskBoard from './components/TaskBoard';
+import { RootState } from './store';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-export function App() {
+const App = () => {
+  const { currentRole } = useSelector((state: RootState) => state.auth);
   return (
-    <Router>
-      <Routes>
-        {/* <Route path="/" exact component={OrganizationSelector} />
-        <Route path="/dashboard" component={Dashboard} /> */}
-      </Routes>
-    </Router>
+    <div className="min-h-screen bg-gray-100 p-4 md:p-8">
+      <div className="flex justify-between items-center w-full">
+        <span className="text-sm font-medium">Current Role: {currentRole}</span>
+        <RoleSwitcher />
+      </div>
+      <TaskBoard />
+    </div>
   );
-}
+};
 
 export default App;

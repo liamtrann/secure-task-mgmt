@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../../apps/dashboard/src/app/types/auth.ts", "../../apps/dashboard/src/app/types/task.ts"],
   "references": [],
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }

@@ -9,5 +9,14 @@ export class CreateTaskInput {
   description?: string;
 
   @Field()
-  category?: string;
+  status!: 'todo' | 'in-progress' | 'done';
+
+  @Field()
+  category!: string;
+
+  @Field()
+  ownerId!: string;
+
+  @Field({ nullable: true })
+  priority?: 'low' | 'medium' | 'high';
 }

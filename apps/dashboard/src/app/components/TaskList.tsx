@@ -1,30 +1,51 @@
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { deleteTask } from '../features/tasks/taskSlice';
+import { Task, TaskStatus } from '../types/task';
+import { TaskCard } from './TaskCard';
+import { Droppable } from 'react-beautiful-dnd';
 
-export default function TaskList() {
-  const tasks = useAppSelector((state) => state.tasks.tasks);
-  const dispatch = useAppDispatch();
+interface TaskListProps {
+  status: TaskStatus;
+  tasks: Task[];
+  onEdit: (task: Task) => void;
+  onDelete: (id: string) => void;
+}
 
+const statusTitles = {
+  todo: 'To Do',
+  'in-progress': 'In Progress',
+  done: 'Done',
+};
+
+export const TaskList = ({
+  status,
+  tasks,
+  onEdit,
+  onDelete,
+}: TaskListProps) => {
   return (
-    <div className="p-4 space-y-4">
-      {tasks.map((task) => (
-        <div
-          key={task.id}
-          className="p-4 bg-white dark:bg-gray-800 shadow-md rounded-md flex justify-between"
-        >
-          <div>
-            <h2 className="text-lg font-semibold">{task.title}</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300">{task.category}</p>
-            <p className="text-sm italic">{task.status}</p>
-          </div>
-          <button
-            onClick={() => dispatch(deleteTask(task.id))}
-            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+    <div className="flex-1">
+      <h2 className="text-xl font-bold mb-4">{statusTitles[status]}</h2>
+      <Droppable droppableId={status}>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className={`bg-gray-50 p-4 rounded-lg min-h-[200px] ${
+              snapshot.isDraggingOver ? 'bg-blue-50' : ''
+            }`}
           >
-            Delete
-          </button>
-        </div>
-      ))}
+            {tasks.map((task, index) => (
+              <TaskCard
+                key={task.id}
+                task={task}
+                index={index}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
-}
+};
