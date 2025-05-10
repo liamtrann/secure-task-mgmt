@@ -7,13 +7,12 @@ import { UserService } from '../user/user.service';
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.userService.findByEmail(email);
-    if (user && await bcrypt.compare(password, user.password)) {
-      // Exclude password from the returned user object
+    if (user && (await bcrypt.compare(password, user.password))) {
       const { password, ...result } = user;
       return result;
     }
@@ -21,9 +20,10 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload: JwtPayload = { email: user.email, sub: user.id };
+    const payload = { email: user.email, id: user.id, role: user.role };
     return {
-      access_token: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload),
+      user: user,
     };
   }
 }

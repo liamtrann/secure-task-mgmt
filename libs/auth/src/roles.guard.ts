@@ -15,13 +15,15 @@ export class RolesGuard implements CanActivate {
       ctx.getHandler(),
       ctx.getClass(),
     ]);
+
+    console.log(requiredRoles)
     if (!requiredRoles) return true; 
 
     const gqlCtx = GqlExecutionContext.create(ctx).getContext();
     const user = gqlCtx.user;
-    
+    // console.log(gqlCtx)
     if (!user) {
-      throw new Error('Unauthorized'); // If the user is not found in the context, deny access
+      throw new Error('Unauthorized');
     }
 
     return requiredRoles.includes(user.role); 

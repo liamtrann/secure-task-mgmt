@@ -10,11 +10,13 @@ import { TaskModule } from './modules/task';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuditLogModule } from './modules/audi-logs/audit-log.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: join(process.cwd(), 'apps/api/.env'), 
+      envFilePath: join(process.cwd(), 'apps/api/.env'),
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -36,11 +38,16 @@ import { AuditLogModule } from './modules/audi-logs/audit-log.module';
       autoSchemaFile: join(process.cwd(), 'dist/schema.gql'),
       sortSchema: true,
       playground: true,
+      context: ({ req }) => {
+        return { user: req.user };
+      },
     }),
     UserModule,
     OrganizationModule,
     TaskModule,
     AuditLogModule,
+    AuthModule,
+    JwtModule
   ],
   controllers: [AppController],
   providers: [AppService],
