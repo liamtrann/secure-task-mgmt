@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthState } from '../../types/auth';
-import { Role } from '../../types/enums';
+import { AuthState } from '../../components/types/auth';
+import { Role } from '../../components/types/enums';
 
 const initialState: AuthState = {
   currentRole: Role.VIEWER,

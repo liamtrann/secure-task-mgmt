@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { Task, TaskStatus } from '../types/task';
+import { Task, TaskStatus } from './types/task';
 import { TaskList } from '../components/TaskList';
 import { TaskForm } from '../components/TaskForm';
 import { CategoryFilter } from '../components/CategoryFilter';

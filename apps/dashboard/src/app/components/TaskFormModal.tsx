@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from './common';
 import { TaskForm } from './TaskForm';
-import { Task } from '../types/task';
+import { Task } from './types/task';
 
 interface TaskFormModalProps {
   showForm: boolean;

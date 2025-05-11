@@ -1,7 +1,7 @@
 import { Draggable } from 'react-beautiful-dnd';
-import { Task } from '../types/task';
+import { Task } from './types/task';
 import { Button, DateFormat, Heading, PriorityBadge } from './common';
-import { Role } from '../types/enums';
+import { Role } from './types/enums';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
 

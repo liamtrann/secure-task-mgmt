@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Task } from '../types/task';
+import { Task } from './types/task';
 import { Button, FormField, Input, Label, Select, Textarea } from './common';
 
 interface TaskFormProps {

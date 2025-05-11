@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { switchRole } from '../features/auth/authSlice';
 import SelectOption from './common/SelectOption';
-import { Role } from '../types/enums';
+import { Role } from './types/enums';
 
 const roleOptions: Role[] = [Role.ADMIN, Role.OWNER, Role.VIEWER];
 
